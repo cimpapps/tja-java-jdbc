@@ -1,19 +1,19 @@
 
-import student.Student;
+import model.Project;
 
 import java.sql.SQLException;
+import java.util.List;
 
-import static repository.StudentRepository.STUDENT_REPOSITORY;
+import static service.ProjectService.PROJECT_SERVICE;
 
 
 public class Main {
 
     public static void main(String[] args) throws SQLException, InterruptedException {
-
-        Student student = new Student();
-        student.setUsername("dan.perescu");
-        student.setEmail("dan.perescu@gmail.com");
-        STUDENT_REPOSITORY.createStudent(student);
+        final List<Project> projects = PROJECT_SERVICE.listProjectsByName("Jira");
+        System.out.println(projects);
+        final Project projectById = PROJECT_SERVICE.findProjectById(2);
+        System.out.println(projectById);
     }
 
 

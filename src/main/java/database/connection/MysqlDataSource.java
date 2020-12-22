@@ -5,7 +5,6 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Optional;
 
 public enum MysqlDataSource {
 
@@ -13,9 +12,9 @@ public enum MysqlDataSource {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/tja";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
+    private static final String DB_PASSWORD = "Orange123!";
 
-    private HikariDataSource hikariDataSource;
+    private final HikariDataSource hikariDataSource;
 
     private MysqlDataSource() {
         HikariConfig config = new HikariConfig();
@@ -26,14 +25,26 @@ public enum MysqlDataSource {
     }
 
 
-    public Optional<Connection> getConnection() {
+    public Connection getConnection() throws SQLException {
+        return hikariDataSource.getConnection();
+    }
+
+    public void rollback(Connection connection) {
         try {
-            return Optional.ofNullable(hikariDataSource.getConnection());
+            connection.rollback();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return Optional.empty();
     }
 
 
+    public void closeConnection(Connection connection) {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
 }

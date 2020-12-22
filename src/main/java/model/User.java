@@ -1,10 +1,17 @@
-package student;
+package model;
 
-public class Student {
+public class User {
     private int id;
     private String username;
-    private String email;
 
+    public User(String username) {
+        this.username = username;
+    }
+
+    public User(int id, String username) {
+        this.id = id;
+        this.username = username;
+    }
 
     public int getId() {
         return id;
@@ -20,13 +27,5 @@ public class Student {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }
