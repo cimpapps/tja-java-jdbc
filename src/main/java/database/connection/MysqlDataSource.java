@@ -12,7 +12,7 @@ public enum MysqlDataSource {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/tja";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
+    private static final String DB_PASSWORD = "Orange123!";
 
     private final HikariDataSource hikariDataSource;
 

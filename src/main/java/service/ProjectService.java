@@ -24,7 +24,6 @@ public enum ProjectService {
 
         try (Connection connection = DATA_SOURCE.getConnection()) {
             PROJECT_REPOSITORY.createProject(connection, project);
-
         } catch (SQLIntegrityConstraintViolationException sqlIntegrityConstraintViolationException) {
             throw new InvalidEntityException("Invalid project. Check project fields. " +
                     "Maybe you have already a project with the same name");
@@ -83,6 +82,7 @@ public enum ProjectService {
         List<Project> projects;
         try (Connection connection = DATA_SOURCE.getConnection()){
             //TODO check if the user exists with the user repository
+
             projects = PROJECT_REPOSITORY.listProjectsByUser(connection, userId);
         } catch (SQLIntegrityConstraintViolationException sqlIntegrityConstraintViolationException) {
             throw new InvalidEntityException("Invalid project. Check project fields. " +

@@ -7,7 +7,14 @@ import lombok.Data;
 @Builder
 public class Project {
 
+    /*
+    primary key, AI
+     */
     private int id;
+    /*
+    UNIQUE
+    NON NULL
+     */
     private String name;
 
 }
