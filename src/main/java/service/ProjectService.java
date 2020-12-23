@@ -41,6 +41,9 @@ public enum ProjectService {
         List<Project> projects;
         try (Connection connection = DATA_SOURCE.getConnection()) {
             projects = PROJECT_REPOSITORY.listProjectsByName(connection, projectName);
+        } catch (SQLIntegrityConstraintViolationException sqlIntegrityConstraintViolationException) {
+            throw new InvalidEntityException("Invalid project. Check project fields. " +
+                    "Maybe you have already a project with the same name");
         } catch (SQLException sqlException) {
             throw new JiraSystemException(Status.DB_CONNECTION_PROBLEM,
                     "check that you are able to call db in the network");
@@ -53,6 +56,9 @@ public enum ProjectService {
         List<Project> projects;
         try (Connection connection = DATA_SOURCE.getConnection()){
             projects = PROJECT_REPOSITORY.listAll(connection);
+        } catch (SQLIntegrityConstraintViolationException sqlIntegrityConstraintViolationException) {
+            throw new InvalidEntityException("Invalid project. Check project fields. " +
+                    "Maybe you have already a project with the same name");
         } catch (SQLException sqlException) {
             throw new JiraSystemException(Status.DB_CONNECTION_PROBLEM,
                     "check that you are able to call db in the network");
@@ -64,6 +70,9 @@ public enum ProjectService {
         try (Connection connection = DATA_SOURCE.getConnection()) {
             return PROJECT_REPOSITORY.findProjectById(connection, id)
                     .orElseThrow(() -> new ProjectNotFoundException(id));
+        } catch (SQLIntegrityConstraintViolationException sqlIntegrityConstraintViolationException) {
+            throw new InvalidEntityException("Invalid project. Check project fields. " +
+                    "Maybe you have already a project with the same name");
         } catch (SQLException sqlException) {
             throw new JiraSystemException(Status.DB_CONNECTION_PROBLEM,
                     "check that you are able to call db in the network");
@@ -73,9 +82,12 @@ public enum ProjectService {
     public List<Project> findProjectByUserId(int userId) {
         List<Project> projects;
         try (Connection connection = DATA_SOURCE.getConnection()){
+            //TODO check if the user exists with the user repository
             projects = PROJECT_REPOSITORY.listProjectsByUser(connection, userId);
-        }
-        catch (SQLException sqlException) {
+        } catch (SQLIntegrityConstraintViolationException sqlIntegrityConstraintViolationException) {
+            throw new InvalidEntityException("Invalid project. Check project fields. " +
+                    "Maybe you have already a project with the same name");
+        } catch (SQLException sqlException) {
             throw new JiraSystemException(Status.DB_CONNECTION_PROBLEM,
                     "check that you are able to call db in the network");
         }
