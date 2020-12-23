@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLSyntaxErrorException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static database.connection.MysqlDataSource.DATA_SOURCE;
