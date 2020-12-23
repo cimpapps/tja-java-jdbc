@@ -16,7 +16,7 @@ public enum MysqlDataSource {
 
     private final HikariDataSource hikariDataSource;
 
-    private MysqlDataSource() {
+    MysqlDataSource() {
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl(DB_URL);
         config.setUsername(DB_USER);
