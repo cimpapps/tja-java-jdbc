@@ -20,7 +20,7 @@ public enum ProjectService {
     PROJECT_SERVICE;
 
     public void createProject(String projectName) {
-        Project project = new Project(projectName);
+        Project project = Project.builder().name(projectName).build();
 
         try (Connection connection = DATA_SOURCE.getConnection()) {
             PROJECT_REPOSITORY.createProject(connection, project);

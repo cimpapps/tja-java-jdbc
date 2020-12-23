@@ -84,6 +84,9 @@ public enum ProjectRepository {
     private Project mapRowToProject(ResultSet resultSet) throws SQLException {
         final int projectId = resultSet.getInt(1);
         final String name = resultSet.getString(2);
-        return new Project(projectId, name);
+        return Project.builder()
+                .id(projectId)
+                .name(name)
+                .build();
     }
 }
