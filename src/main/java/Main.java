@@ -12,8 +12,11 @@ public class Main {
     public static void main(String[] args) throws SQLException, InterruptedException {
         final List<Project> projects = PROJECT_SERVICE.listProjectsByName("Jira");
         System.out.println(projects);
-        final Project projectById = PROJECT_SERVICE.findProjectById(2);
+        final Project projectById = PROJECT_SERVICE.findProjectById(9);
         System.out.println(projectById);
+        final List<Project> projectByUserId = PROJECT_SERVICE.findProjectByUserId(1);
+        System.out.println(projectByUserId);
+
     }
 
 
